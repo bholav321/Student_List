@@ -33,6 +33,7 @@ function App() {
   }
 
   const addBranch = (branch)=>{
+    updateDetail===true?setUpdateDetail(false):setUpdateDetail(false);
     updateBranch(branch);
   }
 
@@ -41,14 +42,18 @@ function App() {
     updateDetail===false?setUpdateDetail(true):setUpdateDetail(false);
   }
   return (<>
-    <div className='container-fluid bg-danger'>
+  <section className='position-relative'>
+
+    <div className='container-fluid bg-danger position-sticky top-0'>
         <h1 className='text-white text-center'>Student List</h1>
     </div>
-   <Input  student = {student} defaultBranch = {defaultBranch} deleteRecord = {deleteRecord} addBranch = {addBranch} addStudent={addStudent}/>
+   <Input setUpdateDetail={setUpdateDetail} student = {student} defaultBranch = {defaultBranch} deleteRecord = {deleteRecord} addBranch = {addBranch} addStudent={addStudent}/>
     <div className='container mt-3'>
       {updateDetail && <Edit updateDetail={updateDetail} setUpdateDetail = {setUpdateDetail} updateStudent = {updateStudent} student = {student} dataForUpdate = {dataForUpdate}/>}
-      <Table student = {student} defaultBranch = {defaultBranch} changes = {changes} deleteRecord = {deleteRecord}/>
+     {!updateDetail && <Table student = {student} defaultBranch = {defaultBranch} changes = {changes} deleteRecord = {deleteRecord}/>
+}
     </div>
+  </section>
   </>
   );
 }
